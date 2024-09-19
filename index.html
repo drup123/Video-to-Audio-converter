@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video to Audio Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(to right, #5fc2be, #b11a1a);
+        }
+        
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        
+        .btn:hover {
+            background-color: #45a049;
+        }
+        
+        .status {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        #loading {
+            display: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Video to Audio Converter</h1>
+    <form id="uploadForm" action="/convert" method="post" enctype="multipart/form-data" onsubmit="showLoading()">
+        <label for="videoFile">Choose a video file:</label><br>
+        <input type="file" id="videoFile" name="videoFile" accept="video/*" required><br>
+        <button class="btn" type="submit">Convert to MP3</button>
+    </form>
+    <p class="status" id="status"></p>
+    <div id="loading">
+        <p>Processing your file...</p>
+    </div>
+</div>
+
+<script>
+    function showLoading() {
+        const status = document.getElementById('status');
+        const loading = document.getElementById('loading');
+        
+        // Check if file is selected
+        const videoFile = document.getElementById('videoFile').files[0];
+        if (!videoFile) {
+            status.innerHTML = "Please select a video file.";
+            return false;
+        }
+
+        // Show loading message
+        status.innerHTML = "";
+        loading.style.display = "block";
+    }
+</script>
+
+</body>
+</html>
